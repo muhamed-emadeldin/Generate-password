@@ -8,9 +8,10 @@ import random
 import secrets
 
 #-->Validation
-from descriptor import Name
+from decoratores import nameAssert, emailAssert
 
-
+@nameAssert(name=str)
+@emailAssert(email=str)
 class ChangePassword(object):
   '''
   We start to create our args:[name, email, length of password, peirod to refresh password]
@@ -20,13 +21,12 @@ class ChangePassword(object):
   --> get symbol charatcter from list pun.
   --> generate password.
   '''
-  name  = Name()
   #--> create initial method
   def __init__(self, name, email, leng, days):
-    self.name   = name
-    self.__email  = email
-    self.__leng   = leng
-    self.__days   = days
+    self.name     = name
+    self.email    = email
+    self.leng     = leng
+    self.days     = days
     self.__pun    = ["!","#","$","%","&","*","+","-","/",":",";","<","=",">","?","@"]
     self.__ls     = []
 
@@ -41,7 +41,7 @@ class ChangePassword(object):
   #--> create method to get defference between length of name and length of password
   @property
   def get_deference(self):
-    return abs(len(self.name) - self.__leng) - 1
+    return abs(len(self.name) - self.leng) - 1
 
   #--> create method to get random numbers with length of defference
   @property
